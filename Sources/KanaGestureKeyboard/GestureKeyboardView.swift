@@ -60,9 +60,9 @@ public struct GestureKeyboardView: View {
                         ProgressView(value: vm.loadingProgress)
                             .progressViewStyle(.linear)
                             .frame(width: 100, height: 10)
-                        Text("Fetching data...")
+                        Text("\(vm.loadingProgress * 100, specifier: "%.0f")%")
                             .multilineTextAlignment(.center)
-                            .font(.caption)
+                            .font(.caption.monospacedDigit())
                     }
                 }
             }

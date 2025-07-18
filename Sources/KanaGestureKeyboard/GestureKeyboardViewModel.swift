@@ -44,7 +44,7 @@ class GestureKeyboardViewModel {
 
     nonisolated private func loadVocabularies(filename: String = "vocabulary.txt") async {
         guard
-            let fileURL = Bundle.module.url(forResource: filename, withExtension: nil)
+            let fileURL = Bundle.module.url(forResource: filename, withExtension: nil),
             let content = try? String(contentsOf: fileURL, encoding: .utf8)
         else {
             print("Failed to load vocabulary file: \(filename)")
