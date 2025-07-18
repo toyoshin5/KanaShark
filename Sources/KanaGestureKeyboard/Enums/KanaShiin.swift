@@ -10,6 +10,7 @@ struct KanaShiinPair: Hashable, Sendable {
     let lastShiin: KanaShiin
 }
 
+/// Represents a consonant (shiin) in the Japanese Kana syllabary.
 public enum KanaShiin: String, Hashable, Sendable {
     case a = "あ"
     case k = "か"

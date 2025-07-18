@@ -8,9 +8,17 @@
 import SwiftUI
 
 // View
+/// A SwiftUI view that provides a gesture-based Hiragana keyboard.
 public struct GestureKeyboardView: View {
     @State private var vm: GestureKeyboardViewModel
 
+    /// Creates a GestureKeyboardView.
+    /// - Parameters:
+    ///   - hiraganaPositions: The positions of Hiragana characters on the keyboard.
+    ///   - minConfidence: The minimum confidence threshold for candidate generation.
+    ///   - onGestureStarted: Callback when a gesture starts.
+    ///   - onGestureEnded: Callback when a gesture ends.
+    ///   - onCandidatesGenerated: Callback when candidates are generated.
     public init(
         hiraganaPositions: [HiraganaPosition],
         minConfidence: CGFloat = 0.001,
@@ -27,6 +35,7 @@ public struct GestureKeyboardView: View {
         )
     }
 
+    /// The content and layout of the gesture keyboard view.
     public var body: some View {
         GeometryReader { geometry in
             ZStack {
