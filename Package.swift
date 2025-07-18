@@ -17,12 +17,15 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "KanaGestureKeyboard"
+            name: "KanaGestureKeyboard",
+            dependencies: [],
+            resources: [
+                .process("vocabulary.txt")
+            ]
         ),
         .testTarget(
             name: "ArrayExtensionTest",
             dependencies: ["KanaGestureKeyboard"]
-        ),
-
+        )
     ]
 )

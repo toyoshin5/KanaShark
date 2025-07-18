@@ -5,7 +5,6 @@
 //  Created by Shingo Toyoda on 2025/04/02.
 //
 import SwiftUI
-
 // ViewModel
 @Observable @MainActor
 class GestureKeyboardViewModel {
@@ -43,11 +42,12 @@ class GestureKeyboardViewModel {
         isShowLoading = false
     }
 
-    nonisolated private func loadVocabularies(filename: String = "vocabulary-gm.txt") async {
+    nonisolated private func loadVocabularies(filename: String = "vocabulary.txt") async {
         guard
-            let fileURL = Bundle.main.url(forResource: filename, withExtension: nil),
+            let fileURL = Bundle.module.url(forResource: filename, withExtension: nil)
             let content = try? String(contentsOf: fileURL, encoding: .utf8)
         else {
+            print("Failed to load vocabulary file: \(filename)")
             return
         }
         let hiraganaPositions = await self.hiraganaPositions
