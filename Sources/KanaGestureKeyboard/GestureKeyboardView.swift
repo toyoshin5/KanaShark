@@ -85,7 +85,6 @@ public struct GestureKeyboardView: View {
 #Preview("Shiin") {
     GestureKeyboardView(
         hiraganaPositions: .default,
-        style: .init(font: .system(size: 24)),
         onCandidatesGenerated: { res in
             print("Result count: \(res.count)")
             for (index, result) in res.prefix(3).enumerated() {
