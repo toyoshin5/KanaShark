@@ -20,8 +20,9 @@ public struct GestureKeyboardView: View {
     ///   - onGestureEnded: Callback when a gesture ends.
     ///   - onCandidatesGenerated: Callback when candidates are generated.
     public init(
-        hiraganaPositions: [HiraganaPosition],
+        hiraganaPositions: [HiraganaPosition] = .default,
         minConfidence: CGFloat = 0.001,
+        style: GestureKeyboardStyle = GestureKeyboardStyle(),
         onGestureStarted: @escaping (() -> Void) = {},
         onGestureEnded: @escaping (([CGPoint]) -> Void) = { _ in },
         onCandidatesGenerated: @escaping ([GestureKeyboardResult]) -> Void
@@ -29,6 +30,7 @@ public struct GestureKeyboardView: View {
         vm = GestureKeyboardViewModel(
             hiraganaPositions: hiraganaPositions,
             minConfidence: minConfidence,
+            style: style,
             onGestureStarted: onGestureStarted,
             onGestureEnded: onGestureEnded,
             onCandidatesGenerated: onCandidatesGenerated
@@ -42,15 +44,15 @@ public struct GestureKeyboardView: View {
                 Path { path in
                     path.addLines(vm.tracePoints)
                 }
-                .strokedPath(.init(lineWidth: 6, lineCap: .round, lineJoin: .round))
-                .foregroundStyle(.white.opacity(0.5))
+                .strokedPath(.init(lineWidth: vm.style.traceLineWidth, lineCap: .round, lineJoin: .round))
+                .foregroundStyle(vm.style.traceColor)
 
                 // 全てのひらがなを配置
                 ForEach(vm.hiraganaPositions, id: \.self) { position in
                     let shiin = position.shiin
                     Text(shiin.rawValue)
-                        .font(.system(size: 16))
-                        .bold()
+                        .font(vm.style.font)
+                        .foregroundColor(vm.style.textColor)
                         .position(
                             x: position.x * geometry.size.width,
                             y: position.y * geometry.size.height
@@ -83,6 +85,7 @@ public struct GestureKeyboardView: View {
 #Preview("Shiin") {
     GestureKeyboardView(
         hiraganaPositions: .default,
+        style: .init(font: .system(size: 24)),
         onCandidatesGenerated: { res in
             print("Result count: \(res.count)")
             for (index, result) in res.prefix(3).enumerated() {

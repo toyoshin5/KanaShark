@@ -18,16 +18,19 @@ class GestureKeyboardViewModel {
     var keyboardSize: CGSize = .zero
     var isShowLoading: Bool = false
     var loadingProgress: CGFloat = 0
+    var style: GestureKeyboardStyle
 
     init(
         hiraganaPositions: [HiraganaPosition],
         minConfidence: CGFloat,
+        style: GestureKeyboardStyle = GestureKeyboardStyle(),
         onGestureStarted: (() -> Void)?,
         onGestureEnded: (([CGPoint]) -> Void)?,
-        onCandidatesGenerated: @escaping (([GestureKeyboardResult]) -> Void),
+        onCandidatesGenerated: @escaping (([GestureKeyboardResult]) -> Void)
     ) {
         self.hiraganaPositions = hiraganaPositions
         self.minConfidence = minConfidence
+        self.style = style
         self.onGestureStarted = onGestureStarted
         self.onGestureEnded = onGestureEnded
         self.onCandidatesGenerated = onCandidatesGenerated
