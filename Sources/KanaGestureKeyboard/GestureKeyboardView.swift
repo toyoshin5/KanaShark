@@ -81,20 +81,8 @@ public struct GestureKeyboardView: View {
 }
 
 #Preview("Shiin") {
-    let hiraganaPositions = [
-        HiraganaPosition(shiin: .a, x: 1 / 6, y: 1 / 8),
-        HiraganaPosition(shiin: .k, x: 3 / 6, y: 1 / 8),
-        HiraganaPosition(shiin: .s, x: 5 / 6, y: 1 / 8),
-        HiraganaPosition(shiin: .t, x: 1 / 6, y: 3 / 8),
-        HiraganaPosition(shiin: .n, x: 3 / 6, y: 3 / 8),
-        HiraganaPosition(shiin: .h, x: 5 / 6, y: 3 / 8),
-        HiraganaPosition(shiin: .m, x: 1 / 6, y: 5 / 8),
-        HiraganaPosition(shiin: .y, x: 3 / 6, y: 5 / 8),
-        HiraganaPosition(shiin: .r, x: 5 / 6, y: 5 / 8),
-        HiraganaPosition(shiin: .w, x: 3 / 6, y: 7 / 8),
-    ]
     GestureKeyboardView(
-        hiraganaPositions: hiraganaPositions,
+        hiraganaPositions: .default,
         onCandidatesGenerated: { res in
             print("Result count: \(res.count)")
             for (index, result) in res.prefix(3).enumerated() {
