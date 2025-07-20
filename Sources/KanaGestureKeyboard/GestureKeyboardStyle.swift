@@ -5,16 +5,19 @@ public struct GestureKeyboardStyle {
     public var textColor: Color
     public var traceColor: Color
     public var traceLineWidth: CGFloat
+    public var loadingIndicatorColor: Color
 
     public init(
         font: Font = .system(size: 16, weight: .bold),
         textColor: Color = .white,
         traceColor: Color = .white.opacity(0.5),
-        traceLineWidth: CGFloat = 6
+        traceLineWidth: CGFloat = 6,
+        loadingIndicatorColor: Color = .gray
     ) {
         self.font = font
         self.textColor = textColor
         self.traceColor = traceColor
         self.traceLineWidth = traceLineWidth
+        self.loadingIndicatorColor = loadingIndicatorColor
     }
 }

@@ -75,6 +75,8 @@ public struct GestureKeyboardView: View {
                             .multilineTextAlignment(.center)
                             .font(.caption.monospacedDigit())
                     }
+                    .tint(vm.style.loadingIndicatorColor)
+                    .foregroundStyle(vm.style.loadingIndicatorColor)
                 }
             }
         }

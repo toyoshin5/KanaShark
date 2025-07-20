@@ -33,9 +33,10 @@ struct ContentView: View {
             minConfidence: 0.001,        // Confidence threshold for candidate generation
             style: GestureKeyboardStyle( // Keyboard appearance
                 font: .system(size: 18, weight: .bold),
-                textColor: .yellow,
-                traceColor: .blue.opacity(0.5),
-                traceLineWidth: 8
+                textColor: .black,
+                traceColor: .black.opacity(0.5),
+                traceLineWidth: 8,
+                loadingIndicatorColor: .black
             ),
             onGestureStarted: {
                 // Callback when gesture starts
@@ -47,7 +48,9 @@ struct ContentView: View {
             },
             onCandidatesGenerated: { results in
                 // Receives candidate results (array of GestureKeyboardResult)
-                print(results)
+                for (index, result) in results.prefix(3).enumerated() {
+                    print("Result \(index): \(result.text), Confidence: \(result.confidence)")
+                }
             }
         )
     }
