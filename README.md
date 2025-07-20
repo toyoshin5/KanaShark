@@ -52,7 +52,7 @@ struct ContentView: View {
                     print("Result \(index): \(result.text), Confidence: \(result.confidence)")
                 }
             }
-        )
+        ).frame(width: 300, height: 300)
     }
 }
 ```

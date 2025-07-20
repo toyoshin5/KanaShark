@@ -93,6 +93,5 @@ public struct GestureKeyboardView: View {
                 print("Result \(index): \(result.text), Confidence: \(result.confidence)")
             }
         }
-    )
-    .edgesIgnoringSafeArea(.all)
+    ).frame(maxWidth: 300, maxHeight: 300)
 }

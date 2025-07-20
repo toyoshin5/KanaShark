@@ -9,10 +9,10 @@ public struct GestureKeyboardStyle {
 
     public init(
         font: Font = .system(size: 16, weight: .bold),
-        textColor: Color = .white,
-        traceColor: Color = .white.opacity(0.5),
+        textColor: Color = .primary,
+        traceColor: Color = .primary.opacity(0.5),
         traceLineWidth: CGFloat = 6,
-        loadingIndicatorColor: Color = .gray
+        loadingIndicatorColor: Color = .primary
     ) {
         self.font = font
         self.textColor = textColor
