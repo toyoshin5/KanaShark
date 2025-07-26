@@ -6,18 +6,28 @@ KanaShark is a SwiftPM package that implements a new Japanese input method for s
 
 Japanese input on small touchscreens is challenging, often relying on voice input or candidate selection. Flick keyboards also suffer from the "fat finger problem" due to small keys. Gesture input, which allows entering entire words with a single stroke, is attracting attention as an efficient method. This project applies a consonant-tracing approach combined with SHARK2 technology to Japanese input.
 
-## Processing Flow
+## Swift Package Manager (SPM) Integration
 
-1. After gesture input, calculate the likelihood of each word in the dictionary based on the trajectory
-2. Return word candidates with likelihood above a threshold, sorted by likelihood
+You can add KanaShark as a dependency using Swift Package Manager in two ways:
 
-## Dictionary
+**Method 1: Using Xcode**
 
-- Uses [Japanese Web Corpus 2010](https://www.s-yata.jp/corpus/nwc2010/)
-- Files with frequency 1000+: [file list](https://s3-ap-northeast-1.amazonaws.com/nwc2010-ngrams/word/over999/filelist)
-- 100,000 entries each for 1-gram/2-gram, 20,000 each for 3-gram/4-gram, 10,000 for 5-gram, totaling 250,000 words
-- Readings generated with Mecab
-- 4-gram/5-gram are for fixed phrases
+1. Go to `File → Add Package Dependencies...`
+2. Enter the following URL:
+   ```
+   https://github.com/toyoshin5/SystemUsabilityScaleJP
+   ```
+3. Click `Add Package`
+
+**Method 2: Edit Package.swift Directly**
+
+Add the following to your `dependencies` array:
+
+```swift
+.dependencies: [
+    .package(url: "https://github.com/toyoshin5/SystemUsabilityScaleJP", from: "0.1.0")
+]
+```
 ---
 ## Usage
 
@@ -67,6 +77,17 @@ Arguments:
 - `onGestureEnded`: Callback when gesture ends (array of trace points)
 - `onCandidatesGenerated`: Callback when candidates are generated (result array)
 
+## Processing Flow
+
+1. After gesture input, calculate the likelihood of each word in the dictionary based on the trajectory
+2. Return word candidates with likelihood above a threshold, sorted by likelihood
+
+## Dictionary
+
+- Uses [Japanese Web Corpus 2010](https://www.s-yata.jp/corpus/nwc2010/)
+- 100,000 entries each for 1-gram/2-gram, 20,000 each for 3-gram/4-gram, 10,000 for 5-gram, totaling 250,000 words
+- Readings generated with Mecab
+- 4-gram/5-gram words are for fixed phrases
 
 ## References
 
