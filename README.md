@@ -15,7 +15,7 @@ You can add KanaShark as a dependency using Swift Package Manager in two ways:
 1. Go to `File → Add Package Dependencies...`
 2. Enter the following URL:
    ```
-   https://github.com/toyoshin5/SystemUsabilityScaleJP
+   https://github.com/toyoshin5/KanaShark
    ```
 3. Click `Add Package`
 
@@ -25,7 +25,7 @@ Add the following to your `dependencies` array:
 
 ```swift
 .dependencies: [
-    .package(url: "https://github.com/toyoshin5/SystemUsabilityScaleJP", from: "0.1.0")
+    .package(url: "https://github.com/toyoshin5/KanaShark", from: "0.1.0")
 ]
 ```
 ---
