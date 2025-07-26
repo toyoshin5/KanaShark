@@ -1,6 +1,6 @@
 //
 //  Untitled.swift
-//  KanaGestureKeyboard
+//  KanaShark
 //
 //  Created by Shingo Toyoda on 2025/06/02.
 //

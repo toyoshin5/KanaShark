@@ -86,12 +86,26 @@ public struct GestureKeyboardView: View {
 
 #Preview("Shiin") {
     GestureKeyboardView(
-        hiraganaPositions: .default,
-        onCandidatesGenerated: { res in
-            print("Result count: \(res.count)")
-            for (index, result) in res.prefix(3).enumerated() {
+        hiraganaPositions: .default, // Hiragana layout (default recommended)
+        minConfidence: 0.001,        // Confidence threshold for candidate generation
+        style: GestureKeyboardStyle( // Keyboard appearance
+            font: .system(size: 18, weight: .bold),
+            textColor: .primary,
+            traceColor: .primary.opacity(0.5),
+            traceLineWidth: 8,
+            loadingIndicatorColor: .primary
+        ),
+        onGestureStarted: {
+            // Callback when gesture starts
+        },
+        onGestureEnded: { points in
+            // Callback when gesture ends (receives array of trace points)
+        },
+        onCandidatesGenerated: { results in
+            // Receives candidate results (array of GestureKeyboardResult)
+            for (index, result) in results.prefix(10).enumerated() {
                 print("Result \(index): \(result.text), Confidence: \(result.confidence)")
             }
         }
-    ).frame(maxWidth: 300, maxHeight: 300)
+    ).frame(width: 200, height: 200)
 }

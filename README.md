@@ -1,6 +1,6 @@
-# KanaGestureKeyboard
+# KanaShark
 
-KanaGestureKeyboard is a SwiftPM package that implements a new Japanese input method for small screens such as iOS and watchOS. By using SHARK2-based word prediction for gesture operations tracing consonants, it enables fast Japanese text input.
+KanaShark is a SwiftPM package that implements a new Japanese input method for small screens such as iOS and watchOS. By using SHARK2-based word prediction for gesture operations tracing consonants, it enables fast Japanese text input.
 
 ## Background
 
@@ -24,7 +24,7 @@ Japanese input on small touchscreens is challenging, often relying on voice inpu
 You can use Japanese gesture input simply by displaying GestureKeyboardView in SwiftUI.
 
 ```swift
-import KanaGestureKeyboard
+import KanaShark
 
 struct ContentView: View {
     var body: some View {
@@ -33,26 +33,24 @@ struct ContentView: View {
             minConfidence: 0.001,        // Confidence threshold for candidate generation
             style: GestureKeyboardStyle( // Keyboard appearance
                 font: .system(size: 18, weight: .bold),
-                textColor: .black,
-                traceColor: .black.opacity(0.5),
+                textColor: .primary,
+                traceColor: .primary.opacity(0.5),
                 traceLineWidth: 8,
-                loadingIndicatorColor: .black
+                loadingIndicatorColor: .primary
             ),
             onGestureStarted: {
                 // Callback when gesture starts
-                print("Gesture started")
             },
             onGestureEnded: { points in
                 // Callback when gesture ends (receives array of trace points)
-                print("Gesture ended: \(points)")
             },
             onCandidatesGenerated: { results in
                 // Receives candidate results (array of GestureKeyboardResult)
-                for (index, result) in results.prefix(3).enumerated() {
+                for (index, result) in results.prefix(10).enumerated() {
                     print("Result \(index): \(result.text), Confidence: \(result.confidence)")
                 }
             }
-        ).frame(width: 300, height: 300)
+        ).frame(width: 200, height: 200)
     }
 }
 ```

@@ -8,7 +8,7 @@
 import CoreGraphics
 import Testing
 
-@testable import KanaGestureKeyboard
+@testable import KanaShark
 
 struct ArrayExtensionTest {
     // MARK: - CGPoint 拡張のテスト

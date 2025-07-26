@@ -4,20 +4,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "KanaGestureKeyboard",
+    name: "KanaShark",
     platforms: [.watchOS(.v10), .iOS(.v17)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "KanaGestureKeyboard",
-            targets: ["KanaGestureKeyboard"]
+            name: "KanaShark",
+            targets: ["KanaShark"]
         )
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "KanaGestureKeyboard",
+            name: "KanaShark",
             dependencies: [],
             resources: [
                 .process("vocabulary.txt")
@@ -25,7 +25,7 @@ let package = Package(
         ),
         .testTarget(
             name: "ArrayExtensionTest",
-            dependencies: ["KanaGestureKeyboard"]
+            dependencies: ["KanaShark"]
         )
     ]
 )

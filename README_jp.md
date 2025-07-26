@@ -1,6 +1,6 @@
-# KanaGestureKeyboard
+# KanaShark
 
-KanaGestureKeyboardは、iOSやwatchOSなどの小型画面向けに新しい日本語入力方式を実装したSwiftPMパッケージです。子音をなぞるジェスチャ操作に対してSHARK2に基づく単語予測を用いることで、高速な日本語入力を可能にします。
+KanaSharkは、iOSやwatchOSなどの小型画面向けに新しい日本語入力方式を実装したSwiftPMパッケージです。子音をなぞるジェスチャ操作に対してSHARK2に基づく単語予測を用いることで、高速な日本語入力を可能にします。
 
 ## 背景
 
@@ -27,37 +27,42 @@ KanaGestureKeyboardは、iOSやwatchOSなどの小型画面向けに新しい日
 ## 使い方
 
 SwiftUIでGestureKeyboardViewを表示するだけで日本語ジェスチャ入力が利用できます。
+入力したジェスチャに基づいて、候補を`onCandidatesGenerated`コールバックで受け取ることができます。
 
 ```swift
-import KanaGestureKeyboard
+import KanaShark
 
 struct ContentView: View {
     var body: some View {
         GestureKeyboardView(
-            hiraganaPositions: .default, // ひらがなの配置
-            minConfidence: 0.001,        // 候補生成の信頼度しきい値
-            style: GestureKeyboardStyle( // キーボードの見た目
+            hiraganaPositions: .default, // Hiragana layout (default recommended)
+            minConfidence: 0.001,        // Confidence threshold for candidate generation
+            style: GestureKeyboardStyle( // Keyboard appearance
                 font: .system(size: 18, weight: .bold),
-                textColor: .yellow,
-                traceColor: .blue.opacity(0.5),
-                traceLineWidth: 8
+                textColor: .primary,
+                traceColor: .primary.opacity(0.5),
+                traceLineWidth: 8,
+                loadingIndicatorColor: .primary
             ),
             onGestureStarted: {
-                // ジェスチャ開始時のコールバック
-                print("Gesture started")
+                // Callback when gesture starts
             },
             onGestureEnded: { points in
-                // ジェスチャ終了時のコールバック（軌跡座標配列を受け取る)
-                print("Gesture ended: \(points)")
+                // Callback when gesture ends (receives array of trace points)
             },
             onCandidatesGenerated: { results in
-                // 候補結果（GestureKeyboardResult型の配列）を受け取る
-                print(results)
+                // Receives candidate results (array of GestureKeyboardResult)
+                for (index, result) in results.prefix(10).enumerated() {
+                    print("Result \(index): \(result.text), Confidence: \(result.confidence)")
+                }
             }
-        )
+        ).frame(width: 200, height: 200)
     }
 }
 ```
+
+動作例
+
 
 各引数の説明:
 
