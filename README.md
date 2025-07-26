@@ -55,6 +55,9 @@ struct ContentView: View {
 }
 ```
 
+![2025-07-24 16 51 42](https://github.com/user-attachments/assets/fb06565d-5833-420c-a7aa-fa6b8d428029)
+
+
 Arguments:
 
 - `hiraganaPositions`: Hiragana layout on the keyboard (default recommended)
