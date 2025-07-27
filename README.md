@@ -17,7 +17,10 @@ You can add KanaShark as a dependency using Swift Package Manager in two ways:
    ```
    https://github.com/toyoshin5/KanaShark
    ```
-3. Click `Add Package`
+3. Add to Targets:
+   - Select the target you want to add KanaShark to
+     - eg. `MyApp`
+4. Click `Add Package`
 
 **Method 2: Edit Package.swift Directly**
 
