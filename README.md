@@ -1,5 +1,7 @@
 # KanaShark
 
+![gestureShiin](https://github.com/user-attachments/assets/421235ca-4548-48fe-830d-71ae84d4ea30)
+
 KanaShark is a SwiftPM package that implements a new Japanese input method for small screens such as iOS and watchOS. By using SHARK2-based word prediction for gesture operations tracing consonants, it enables fast Japanese text input.
 
 ## Background
