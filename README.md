@@ -10,6 +10,12 @@ Japanese input on small touchscreens is challenging, often relying on voice inpu
 
 ## Swift Package Manager (SPM) Integration
 
+
+**Supported Platforms**
+
+- iOS 17 or later
+- watchOS 10 or later
+
 You can add KanaShark as a dependency using Swift Package Manager in two ways:
 
 **Method 1: Using Xcode**
