@@ -1,4 +1,4 @@
-# KanaShark
+# [KanaShark](https://github.com/toyoshin5/KanaShark)
 
 ![gestureShiin](https://github.com/user-attachments/assets/421235ca-4548-48fe-830d-71ae84d4ea30)
 
