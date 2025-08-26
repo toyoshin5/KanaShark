@@ -16,3 +16,19 @@ public struct GestureKeyboardResult: Sendable, Identifiable {
     /// The confidence score of the recognition.
     public let confidence: Double
 }
+
+// public struct GestureKeyboardRawValues: Sendable {
+//     let distances: GestureKeyboardDistance
+//     let scores: GestureKeyboardRawScore
+// }
+
+// public struct GestureKeyboardDistance: Sendable {
+//     let shapeChannel: Double
+//     let locationChannel: Double
+// }
+
+// public struct GestureKeyboardRawScore: Sendable {
+//     let shapeChannel: Double
+//     let locationChannel: Double
+//     let frequency: Double
+// }

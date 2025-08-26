@@ -15,7 +15,6 @@ struct SharkVocabulary: Sendable {
     let normalizedTracePoints: [CGPoint]
     let traceId: Int
     let shiinArray: [KanaShiin]
-    let boinArray: [KanaBoin]
     var accuracy: Double = 0
 
     // hiraganaPositionsは絶対座標
@@ -29,7 +28,6 @@ struct SharkVocabulary: Sendable {
         self.word = word
         self.frequency = frequency
         shiinArray = SharkVocabulary.convertToShiinArray(word: kana)
-        boinArray = SharkVocabulary.convertToBoinArray(word: kana)
         let (p, np) = SharkVocabulary.calcShiinTracePoint(
             shiin: shiinArray,
             hiraganaPositions: hiraganaPositions,
@@ -56,17 +54,6 @@ struct SharkVocabulary: Sendable {
         return result
     }
 
-    private static func convertToBoinArray(word: String) -> [KanaBoin] {
-        var result = [KanaBoin]()
-        for char in word {
-            let kana = String(char)
-            if let boin = KanaBoin.fromKana(kana) {
-                result.append(boin)
-            }
-        }
-        return result
-    }
-
     private static func calcShiinTracePoint(
         shiin: [KanaShiin],
         hiraganaPositions: [HiraganaPosition]
@@ -83,41 +70,4 @@ struct SharkVocabulary: Sendable {
         let normalizedResampled = positions.normalizedResampled(to: 20, boundingBoxSide: 1)
         return (resampled, normalizedResampled)
     }
-
-    private static func calcFullTracePoint(
-        shiin: [KanaShiin],
-        boin: [KanaBoin],
-        hiraganaPositions: [HiraganaPosition]
-    )
-        -> ([CGPoint], [CGPoint])
-    {
-        var positions: [CGPoint] = []
-
-        for i in 0..<shiin.count {
-            if let pos = hiraganaPositions.first(where: { $0.shiin == shiin[i] }) {
-                let basePoint = CGPoint(x: pos.absX!, y: pos.absY!)
-                positions.append(basePoint)
-                // 母音に応じて追加のポイントを生成
-                let offset: CGFloat = 30
-
-                switch boin[i] {
-                case .i:
-                    positions.append(CGPoint(x: basePoint.x - offset, y: basePoint.y))
-                case .u:
-                    positions.append(CGPoint(x: basePoint.x, y: basePoint.y - offset))
-                case .e:
-                    positions.append(CGPoint(x: basePoint.x + offset, y: basePoint.y))
-                case .o:
-                    positions.append(CGPoint(x: basePoint.x, y: basePoint.y + offset))
-                case .a:
-                    break  // あ段は追加のポイントなし
-                }
-            }
-        }
-
-        let resampled = positions.resampled(to: 20)
-        let normalizedResampled = positions.normalizedResampled(to: 20, boundingBoxSide: 1)
-        return (resampled, normalizedResampled)
-    }
-
 }
