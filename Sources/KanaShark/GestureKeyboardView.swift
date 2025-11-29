@@ -16,6 +16,7 @@ public struct GestureKeyboardView: View {
     /// - Parameters:
     ///   - hiraganaPositions: The positions of Hiragana characters on the keyboard.
     ///   - minConfidence: The minimum confidence threshold for candidate generation.
+    ///   - scoringConfig: The configuration for the scoring engine.
     ///   - onGestureStarted: Callback when a gesture starts.
     ///   - onGestureEnded: Callback when a gesture ends.
     ///   - onCandidatesGenerated: Callback when candidates are generated.
@@ -23,6 +24,7 @@ public struct GestureKeyboardView: View {
         hiraganaPositions: [HiraganaPosition] = .default,
         minConfidence: CGFloat = 0.001,
         style: GestureKeyboardStyle = GestureKeyboardStyle(),
+        scoringConfig: GestureKeyboardScoringConfig = GestureKeyboardScoringConfig(),
         onGestureStarted: @escaping (() -> Void) = {},
         onGestureEnded: @escaping (([CGPoint]) -> Void) = { _ in },
         onCandidatesGenerated: @escaping ([GestureKeyboardResult]) -> Void
@@ -31,6 +33,7 @@ public struct GestureKeyboardView: View {
             hiraganaPositions: hiraganaPositions,
             minConfidence: minConfidence,
             style: style,
+            scoringConfig: scoringConfig,
             onGestureStarted: onGestureStarted,
             onGestureEnded: onGestureEnded,
             onCandidatesGenerated: onCandidatesGenerated
@@ -94,6 +97,10 @@ public struct GestureKeyboardView: View {
             traceColor: .primary.opacity(0.5),
             traceLineWidth: 8,
             loadingIndicatorColor: .primary
+        ),
+        scoringConfig: GestureKeyboardScoringConfig(
+            sigmaShape: 0.008,
+            sigmaLocation: 12
         ),
         onGestureStarted: {
             // Callback when gesture starts

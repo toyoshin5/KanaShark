@@ -19,11 +19,13 @@ class GestureKeyboardViewModel {
     var isShowLoading: Bool = false
     var loadingProgress: CGFloat = 0
     var style: GestureKeyboardStyle
+    let scoringConfig: GestureKeyboardScoringConfig
 
     init(
         hiraganaPositions: [HiraganaPosition],
         minConfidence: CGFloat,
         style: GestureKeyboardStyle = GestureKeyboardStyle(),
+        scoringConfig: GestureKeyboardScoringConfig = GestureKeyboardScoringConfig(),
         onGestureStarted: (() -> Void)?,
         onGestureEnded: (([CGPoint]) -> Void)?,
         onCandidatesGenerated: @escaping (([GestureKeyboardResult]) -> Void)
@@ -31,6 +33,7 @@ class GestureKeyboardViewModel {
         self.hiraganaPositions = hiraganaPositions
         self.minConfidence = minConfidence
         self.style = style
+        self.scoringConfig = scoringConfig
         self.onGestureStarted = onGestureStarted
         self.onGestureEnded = onGestureEnded
         self.onCandidatesGenerated = onCandidatesGenerated
@@ -169,8 +172,8 @@ class GestureKeyboardViewModel {
             shapeDistances: shapeDistances,
             locationDistances: locationDistances,
             frequency: frequencies,
-            sigmaShape: 0.008,
-            sigmaLocation: 12,
+            sigmaShape: scoringConfig.sigmaShape,
+            sigmaLocation: scoringConfig.sigmaLocation,
         )
         return
             narrowedVocabularies
