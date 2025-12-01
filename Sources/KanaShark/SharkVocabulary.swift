@@ -17,7 +17,7 @@ struct SharkVocabulary: Sendable {
     let shiinArray: [KanaShiin]
     var accuracy: Double = 0
 
-    // hiraganaPositionsは絶対座標
+    // hiraganaPositions are in absolute coordinates
     init(
         kana: String,
         word: String,

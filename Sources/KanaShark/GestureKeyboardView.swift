@@ -50,7 +50,7 @@ public struct GestureKeyboardView: View {
                 .strokedPath(.init(lineWidth: vm.style.traceLineWidth, lineCap: .round, lineJoin: .round))
                 .foregroundStyle(vm.style.traceColor)
 
-                // 全てのひらがなを配置
+                // Place all Hiragana characters
                 ForEach(vm.hiraganaPositions, id: \.self) { position in
                     let shiin = position.shiin
                     Text(shiin.rawValue)

@@ -1,5 +1,5 @@
 //
-//  Untitled.swift
+//  GestureKeyboardViewModel.swift
 //  WatchTyping
 //
 //  Created by Shingo Toyoda on 2025/04/02.
@@ -94,7 +94,7 @@ class GestureKeyboardViewModel {
             tempVocabularies[vocabKey, default: []].append(vocab)
         }
 
-        // 4. MainActor 上でまとめて代入
+        // 4. Assign all at once on MainActor
         Task { @MainActor in
             self.vocabularies = tempVocabularies
         }
@@ -128,13 +128,13 @@ class GestureKeyboardViewModel {
         let normalizedTrace = tracePoints.normalizedResampled(to: 20, boundingBoxSide: 1)
         let resampledTrace = tracePoints.resampled(to: 20)
 
-        // キャッシュ用辞書
+        // Cache dictionary
         var locationCache: [Int: CGFloat] = [:]
-        // 結果を格納
+        // Store results
         var shapeDistances: [String: CGFloat] = [:]
         var locationDistances: [String: CGFloat] = [:]
         var frequencies: [String: Double] = [:]
-        // 最も近い子音
+        // Nearest consonant
         let narrowedVocabularies = getNarrowedVocabularies(
             tracePoints: tracePoints,
             hiraganaPositions: hiraganaPositions,
@@ -144,7 +144,7 @@ class GestureKeyboardViewModel {
         for v in narrowedVocabularies {
             let locKey = v.traceId
 
-            // Shape チャネル
+            // Shape channel
             let d1 = SharkScoringEngine.shapeChannel(
                 normalizedTrace,
                 v.normalizedTracePoints
@@ -167,7 +167,7 @@ class GestureKeyboardViewModel {
             frequencies[v.word] = v.frequency
         }
 
-        // チャネル統合
+        // Channel integration
         let scoreDict = SharkScoringEngine.integrateChannels(
             shapeDistances: shapeDistances,
             locationDistances: locationDistances,

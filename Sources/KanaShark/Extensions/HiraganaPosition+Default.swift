@@ -1,7 +1,6 @@
 import Foundation
 
 extension Array where Element == HiraganaPosition {
-    /// デフォルトのひらがなポジション配列
     public static var `default`: [HiraganaPosition] {
         [
             HiraganaPosition(shiin: .a, x: 1.0 / 6.0, y: 1.0 / 8.0),
