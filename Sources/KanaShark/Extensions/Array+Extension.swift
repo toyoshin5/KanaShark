@@ -73,11 +73,11 @@ extension [CGPoint] {
         return result
     }
 
-    /// 等間隔再サンプリング後に正規化（スケーリング＋重心移動）
+    /// Normalizes after equidistant resampling (scaling + centroid translation).
     /// - Parameters:
-    ///   - n: 再サンプリングの点数
-    ///   - boundingBoxSide: バウンディングボックスの大辺をこの長さにスケーリング
-    /// - Returns: 中心が原点、スケール正規化された n 点の配列
+    ///   - n: Number of points for resampling
+    ///   - boundingBoxSide: Scale the larger side of the bounding box to this length
+    /// - Returns: Array of n points, scale normalized, centered at origin
     func normalizedResampled(to n: Int, boundingBoxSide: CGFloat) -> [CGPoint] {
         let pts = resampled(to: n)
         let xs = pts.map { $0.x }

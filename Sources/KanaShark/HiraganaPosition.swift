@@ -1,5 +1,5 @@
 //
-//  Untitled.swift
+//  HiraganaPosition.swift
 //  KanaShark
 //
 //  Created by Shingo Toyoda on 2025/06/02.
@@ -10,10 +10,10 @@ import Foundation
 /// Represents the position of a Hiragana character on the gesture keyboard.
 public struct HiraganaPosition: Hashable, Sendable {
     let shiin: KanaShiin
-    let x: CGFloat  // 0~1の相対位置
-    let y: CGFloat  // 0~1の相対位置
-    var absX: CGFloat?  // 絶対位置
-    var absY: CGFloat?  // 絶対位置
+    let x: CGFloat  // Relative position (0~1)
+    let y: CGFloat  // Relative position (0~1)
+    var absX: CGFloat?  // Absolute position
+    var absY: CGFloat?  // Absolute position
 
     /// Initializes a HiraganaPosition with the specified consonant and relative position.
     /// - Parameters:

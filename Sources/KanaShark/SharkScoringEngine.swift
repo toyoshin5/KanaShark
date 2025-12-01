@@ -4,14 +4,14 @@ import Foundation
 
 struct SharkScoringEngine {
 
-    /// チャンネルスコア（形状・位置）を統合して候補ごとの信頼度スコアを返す
+    /// Integrates channel scores (shape and location) and returns confidence scores for each candidate.
     ///
     /// - Parameters:
-    ///   - shapeDistances: [word: shape distance] （小さいほど良い）
+    ///   - shapeDistances: [word: shape distance] (smaller is better)
     ///   - locationDistances: [word: location distance]
-    ///   - sigmaShape: 形状チャンネルのσ
-    ///   - sigmaLocation: 位置チャンネルのσ
-    /// - Returns: [word: 統合スコア c(w)]（0〜1、合計1）
+    ///   - sigmaShape: Sigma for shape channel
+    ///   - sigmaLocation: Sigma for location channel
+    /// - Returns: [word: integrated score c(w)] (0~1, sum is 1)
     static func integrateChannels(
         shapeDistances: [String: CGFloat],
         locationDistances: [String: CGFloat],
@@ -36,7 +36,7 @@ struct SharkScoringEngine {
         return jointProbs.mapValues { $0 / total }
     }
 
-    /// 速度に応じて位置チャンネルの σ を補正（SHARK2に基づく）
+    /// Adjusts sigma for the location channel based on speed (based on SHARK2).
     static func adjustedSigma(
         idealTime: CGFloat,
         actualTime: CGFloat,
@@ -49,7 +49,7 @@ struct SharkScoringEngine {
         return baseSigma * factor
     }
 
-    /// 2つの形状の距離を計算する関数 (SHARK2のShape Channelに基づく)
+    /// Calculates the distance between two shapes (based on SHARK2's Shape Channel).
     static func shapeChannel(_ a: [CGPoint], _ b: [CGPoint]) -> CGFloat? {
         guard a.count == b.count, a.count > 0 else {
             return nil
@@ -62,7 +62,7 @@ struct SharkScoringEngine {
         return sumSq / CGFloat(a.count)
     }
 
-    /// トンネルスコアを計算する関数（SHARK2のLocation Channelに基づく）
+    /// Calculates the tunnel score (based on SHARK2's Location Channel).
     static func locationChannel(_ u: [CGPoint], _ t: [CGPoint], radius: CGFloat) -> CGFloat? {
         guard u.count > 0, t.count > 0 else { return nil }
 
@@ -80,12 +80,12 @@ struct SharkScoringEngine {
         return score
     }
 
-    /// トンネルスコアに使う重み関数（始点・終点に高い重みをかける）
+    /// Weight function used for tunnel score (applies higher weight to start and end points).
     private static func weight(at i: Int, total N: Int) -> CGFloat {
         let pos = CGFloat(i) / CGFloat(N - 1)
-        return abs(pos - 0.2) * 2  // 端が最大（1.0）、中央が最小（0.6）
+        return abs(pos - 0.2) * 2  // Ends are max (1.0), center is min (0.6)
     }
-    /// 正規分布に基づく確率密度関数
+    /// Probability density function based on Gaussian distribution.
     private static func gaussianPDF(x: CGFloat, sigma: CGFloat) -> CGFloat {
         let coeff = 1 / (sqrt(2 * .pi) * sigma)
         let exponent = -((x * x) / (2 * sigma * sigma))
