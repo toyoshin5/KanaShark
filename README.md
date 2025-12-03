@@ -60,6 +60,10 @@ struct ContentView: View {
                 traceLineWidth: 8,
                 loadingIndicatorColor: .primary
             ),
+            scoringConfig: GestureKeyboardScoringConfig( // Scoring configuration
+                sigmaShape: 0.008,
+                sigmaLocation: 12
+            ),
             onGestureStarted: {
                 // Callback when gesture starts
             },
@@ -85,6 +89,7 @@ Arguments:
 - `hiraganaPositions`: Hiragana layout on the keyboard (default recommended)
 - `minConfidence`: Confidence threshold for candidate generation (smaller = more candidates)
 - `style`: Keyboard appearance (font, color, line width, etc.)
+- `scoringConfig`: Configuration for the scoring engine (sigmaShape, sigmaLocation)
 - `onGestureStarted`: Callback when gesture starts
 - `onGestureEnded`: Callback when gesture ends (array of trace points)
 - `onCandidatesGenerated`: Callback when candidates are generated (result array)
