@@ -106,6 +106,11 @@ Arguments:
 - Readings generated with Mecab
 - 4-gram/5-gram words are for fixed phrases
 
+## Release Notes
+
+### 0.1.3 (2025-12-08)
+- Adjusted the weight formula for scoring.
+
 ## References
 
 - SHARK2: [ACM Paper](https://dl.acm.org/doi/10.1145/1029632.1029640)
