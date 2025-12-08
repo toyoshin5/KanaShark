@@ -81,9 +81,11 @@ struct SharkScoringEngine {
     }
 
     /// Weight function used for tunnel score (applies higher weight to start and end points).
-    private static func weight(at i: Int, total N: Int) -> CGFloat {
+    private static func weight(at i: Int, total N: Int, centerHeight: CGFloat = 0.6) -> CGFloat {
+        guard N > 1 else { return 1.0 }
         let pos = CGFloat(i) / CGFloat(N - 1)
-        return abs(pos - 0.2) * 2  // Ends are max (1.0), center is min (0.6)
+        let slope = (1.0 - centerHeight) * 2
+        return abs(pos - 0.5) * slope + centerHeight
     }
     /// Probability density function based on Gaussian distribution.
     private static func gaussianPDF(x: CGFloat, sigma: CGFloat) -> CGFloat {
