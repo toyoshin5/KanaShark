@@ -40,6 +40,13 @@ class GestureKeyboardViewModel {
     }
 
     @Sendable func task() async {
+        // .task は GeometryReader 内の .onAppear (keyboardSize の設定) より先に
+        // 実行されることがある。サイズが .zero のまま前処理すると全キーの絶対座標が
+        // (0,0) になり候補が一切出なくなるため、サイズ確定を待ってから前処理する。
+        while keyboardSize == .zero {
+            if Task.isCancelled { return }
+            try? await Task.sleep(for: .milliseconds(30))
+        }
         for i in 0..<hiraganaPositions.count {
             hiraganaPositions[i].setAbsPosition(keyboardSize: keyboardSize)
         }
@@ -120,7 +127,7 @@ class GestureKeyboardViewModel {
         }
     }
 
-    nonisolated private func findCandidates(
+    nonisolated func findCandidates(
         tracePoints: [CGPoint],
         vocabularies: [KanaShiinPair: [SharkVocabulary]],
         hiraganaPositions: [HiraganaPosition]
